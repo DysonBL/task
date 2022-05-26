@@ -1,0 +1,13 @@
+.menu {
+  width: 35px;
+  height: 4px;
+  background-color: rgb(250, 246, 246);
+  margin: 6px 0;
+}
+.slideBody{
+  background-color:rgb(20, 118, 20);
+}
+.header{
+  color: rgb(20, 118, 20);
+  text-align: center;
+}
