@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Table,Button} from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import axios from "axios";
-import Pagenation from "./Pagenation";
 
-const Tables = (res) => {
+const Tables = () => {
   const [Data, setData] = useState([]);
-  const [CurrentPage, setCurentPage] = useState(1);
+  const [CurrentPage, setCurentPage] = useState(5);
+  const [pageItem, setPageItem] = useState(5);
 
-
-  const gotofirstPage = () => {
-    console.log("firstPage");
-    setCurentPage((page) => page + 1);
-  };
   const gotoPrevPage = () => {
     console.log("prev");
-
+    setPageItem(CurrentPage - 2);
+    // setCurentPage(CurrentPage -4)
   };
   const gotoNextPage = () => {
     console.log("next");
+    setPageItem(CurrentPage + 2);
+    // setCurentPage(CurrentPage +4)
   };
-  const gotoLastPage = () => {
-    console.log("lastPage");
-  };
-
-
 
   useEffect(() => {
     axios
@@ -36,52 +29,53 @@ const Tables = (res) => {
         console.log(error, "error in get");
       });
   }, []);
+
   // let data =res?.data
   console.log(Data?.data, "stasssss");
-
+  const indexofLastPage = CurrentPage * pageItem;
+  const indexofFirstPage = indexofLastPage - pageItem;
+  const currentPages = Data?.data?.slice(indexofFirstPage - indexofLastPage);
+  console.log(currentPages, "curret");
   return (
     <>
       <div>
-      <div>
-      <div className="AlBtn">
-       
-        <Button className="button" onClick={gotoPrevPage}>
-          Prev
-        </Button>
-        <Button className="button" onClick={gotoNextPage}>
-          Next
-        </Button>
-       
-      </div>
-        <Pagenation/>
-      </div>
-        <div className="Table">
-        <Table striped bordered hover variant="danger">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Age</th>
-              <th>City</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Data?.data?.map((data) => {
-              return (
-                <>
-                  <tr>
-                    <td>{data.Id}</td>
-                    <td>{data.name}</td>
-                    <td>{data.Age}</td>
-                    <td>{data.city}</td>
-                  </tr>
-                </>
-              );
-            })}
-          </tbody>
-        </Table>
+        <div>
+          <div className="AlBtn">
+            <Button className="button" onClick={gotoPrevPage}>
+              Prev ▼
+            </Button>
+            <Button className="button" onClick={gotoNextPage}>
+              Next ▲
+            </Button>
+          </div>
+          <h1>User List</h1>
         </div>
-       
+        <div className="Table">
+          <Table striped bordered hover variant="danger">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentPages?.map((data) => {
+                return (
+                  <>
+                    <tr>
+                      <td>{data.Id}</td>
+                      <td>{data.name}</td>
+                      <td>{data.Age}</td>
+                      <td>{data.city}</td>
+                    </tr>
+                  </>
+                );
+              })}
+            </tbody>
+          </Table>
+        </div>
       </div>
     </>
   );

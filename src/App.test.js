@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
-
+import Tables from "./Table/Tables";
 test('renders learn react link', () => {
-  render(<App />);
-  const headElement = screen.getByText(//i);
+  render(<Tables />);
+  const headElement = screen.getByText(/User List/i);
   expect(headElement).toBeInTheDocument();
 });
