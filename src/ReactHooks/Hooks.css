@@ -12,3 +12,39 @@ p{
     margin-left: 1rem;
 
 }
+/*Memo*/
+.light,
+.dark {
+  font-family: sans-serif;
+  text-align: center;
+  height: 300px;
+
+  align-items: center;
+  justify-items: center;
+}
+
+.dark {
+  background: black;
+  color: white;
+}
+/* UseRef*/
+.ref{
+  text-align: center;
+  margin-top:7rem;
+}
+.head{
+  color: rgb(36, 40, 246);
+}
+/*Reducer*/
+.reducer{
+  text-align: center;
+}
+.add{
+margin:2rem;
+}
+.dec{
+margin: 2rem;
+}
+.clear{
+  margin: 2rem;
+}
